@@ -1,0 +1,51 @@
+#:import images.path kivymd.images_path
+
+
+<GameOverScreenView>
+    name: "game over screen"
+
+    FitImage:
+        source: "resources/images/background-stars.gif"
+        anim_delay: 0.05
+
+    MDBoxLayout:
+        padding: "12dp"
+        orientation: "vertical"
+        adaptive_size: True
+        spacing: "72dp"
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDLabel:
+            id: game_over_label
+            text: 'GAME OVER'
+            adaptive_size: True
+            theme_font_name: "Custom"
+            font_name: "resources/fonts/starwars_4.ttf"
+            theme_text_color: "Custom"
+            text_color: "yellow"
+            theme_font_size: "Custom"
+            font_size: "38sp"
+
+        # Кнопка возвращения к экрану игры.
+        Button:
+            size_hint: None, None
+            size: game_over_label.width, "100dp"
+            text: "RESET"
+            bold: True
+            font_size: "20sp"
+            color: "black"
+            background_color: "yellow"
+            background_normal: f"images_path/" + "transparent.png"
+            on_release: root.controller.on_tap_reset_game_button()
+
+        # Кнопка выхода из игры.
+        Button:
+            size_hint: None, None
+            size: game_over_label.width, "100dp"
+            text: "QUIT"
+            bold: True
+            font_size: "20sp"
+            color: "black"
+            background_color: "yellow"
+            background_normal: f"images_path/" + "transparent.png"
+            on_release: root.controller.on_tap_quit_game_button()

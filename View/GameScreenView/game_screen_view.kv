@@ -1,0 +1,116 @@
+#:import images.path kivymd.images_path
+
+
+<GameScreenView>
+    name: "game screen"
+
+    FitImage:
+        source: "resources/images/background-stars.gif"
+        anim_delay: 0.05
+
+    BoxLayout:
+        id: box_button
+        size_hint_y: None
+        height: "84dp"
+        padding: "12dp"
+
+        # Кнопка движения влево.
+        ClickableButton:
+            model: root.model
+            controller: root.controller
+            direction: "left"
+            source: "resources/images/triangle_right.png"
+            size_hint_x: None
+            width: "84dp"
+            on_release: root.controller.on_tap_left_button()
+
+        # Кнопка движения вправо.
+        ClickableButton:
+            model: root.model
+            controller: root.controller
+            direction: "right"
+            source: "resources/images/triangle_left.png"
+            size_hint_x: None
+            width: "84dp"
+            on_release: root.controller.on_tap_right_button()
+
+        Widget:
+
+        # Кнопка стрельбы.
+        ClickableButton:
+            model: root.model
+            controller: root.controller
+            direction: "fire"
+            source: "resources/images/fire.png"
+            size_hint_x: None
+            width: "84dp"
+            on_release: root.controller.on_tap_fire_button()
+
+    Hero:
+        id: hero
+        y: box_button.y + dp(64)
+        width: root.width * 20 // 100
+        model: root.model
+        controller: root.controller
+        view: root
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: ["5dp", "10dp", "10dp", 0]
+        spacing: "10dp"
+
+        BoxLayout:
+            id: score_container
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: "20dp"
+
+            MDBoxLayout:
+                id: gun_box
+                size_hint_x: None
+                width: self.minimum_width
+
+                MDLabel:
+                    id: type_gun
+                    text: 'Default'
+                    adaptive_width: True
+                    theme_font_name: "Custom"
+                    font_name: "resources/fonts/starwars_4.ttf"
+                    theme_text_color: "Custom"
+                    text_color: "white"
+
+            Widget:
+
+            MDLabel:
+                text: 'Score: '
+                adaptive_width: True
+                theme_font_name: "Custom"
+                font_name: "resources/fonts/starwars_4.ttf"
+                theme_text_color: "Custom"
+                text_color: "yellow"
+
+            MDBoxLayout:
+                id: lives_box
+                size_hint_x: None
+                width: self.minimum_width
+
+                Image:
+                    id: life_image_1
+                    source: 'resources/images/life.png'
+                    size_hint: None, None
+                    size: "25dp", "25dp"
+
+                Image:
+                    id: life_image_2
+                    source: 'resources/images/life.png'
+                    size_hint: None, None
+                    size: "25dp", "25dp"
+
+                Image:
+                    id: life_image_3
+                    source: 'resources/images/life.png'
+                    size_hint: None, None
+                    size: "25dp", "25dp"
+
+        Widget:
+            size_hint_y: 1
