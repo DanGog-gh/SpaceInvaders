@@ -215,9 +215,6 @@ class GameScreenView(BaseScreenView):
         Clock.schedule_interval(self.enemies_shoot, 1)
 
     def enemies_shoot(self, interval):
-        if self.model.bullet_hit_hero:
-            Clock.unschedule(self.enemies_shoot)
-            return
 
         # Сортируем врагов по рядам, начиная с нижнего ряда.
         sorted_enemies = sorted(self.model.array_of_enemies, key=lambda enemy: enemy.row)
@@ -246,6 +243,9 @@ class GameScreenView(BaseScreenView):
             for enemy in enemies_to_shoot:
                 enemy.fire()
 
+    def on_bullet_hit_hero(self):
+        Clock.unschedule(self.enemies_shoot)
+
     # def on_size(self, *args):
     #     # Обновляем положение врагов при изменении размера окна
     #     self.add_enemy()
@@ -257,6 +257,8 @@ class GameScreenView(BaseScreenView):
 
         if self.model.collision_with_hero is True and self.model.array_of_enemies:
             self.controller.on_hero_killed()
+        if self.model.bullet_hit_hero:
+            print("ddddd")
 
     def on_hero_killed(self, *args):
         """Обрабатывает ситуацию, когда враги/пули врагов достигли героя."""

@@ -7,7 +7,7 @@ class BaseScreenModel:
 
     _observers = []  # список всех наблюдателей (представлений/view)
 
-    def notify_observers(self, name_screen: str) -> None:
+    def notify_observers(self, name_screen: str, bullet_hit_hero=False) -> None:
         """
         Метод, который будет вызываться наблюдателем при изменении данных
         модели.
@@ -19,7 +19,10 @@ class BaseScreenModel:
 
         for observer in self._observers:
             if observer.name == name_screen:
-                observer.model_is_changed()
+                if bullet_hit_hero:
+                    observer.on_bullet_hit_hero()
+                else:
+                    observer.model_is_changed()
                 break
 
     def add_observer(self, observer) -> None:

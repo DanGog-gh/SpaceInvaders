@@ -31,11 +31,20 @@ class GameScreenModel(BaseScreenModel):
         self.bullet_hit_target = False  # попала ли пуля во врага
         self.bullet_hit_hero = False  # попала ли пуля в героя
         self.bullet_hit_block = False  # попала ли пуля в препятствие
-        self.hero_invincibility = True  # неуязвимость героя
+        self.hero_invincibility = False  # неуязвимость героя
 
         self.interval_big_enemy = 0
 
     # Встроенные методы, которые вызываются при изменении данных модели.
+
+    @property
+    def bullet_hit_hero(self) -> float:
+        return self._bullet_hit_hero
+
+    @bullet_hit_hero.setter
+    def bullet_hit_hero(self, data: int):
+        self._bullet_hit_hero = data
+        self.notify_observers("game screen", True)
 
     @property
     def speed_bullet_enemy(self) -> float:
