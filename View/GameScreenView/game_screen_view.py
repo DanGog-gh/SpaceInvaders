@@ -35,6 +35,7 @@ class GameScreenView(BaseScreenView):
         self.explosion_number_sprite = 0
         # Загружаем фоновую мелодию игры.
         self.background_sound = SoundLoader.load("resources/audio/soundtrack_3.mp3")
+        self.background_sound.loop = True
         if self.background_sound:
             self.background_sound.play()
         Clock.schedule_once(self.add_enemy, 2)
@@ -93,7 +94,7 @@ class GameScreenView(BaseScreenView):
         def set_sprite(*args):
             if self.explosion_number_sprite > 7:
                 self.explosion_number_sprite = 0
-                self.remove_widget(hero)
+                hero.opacity=0
                 Clock.unschedule(set_sprite)
                 Clock.schedule_once(lambda x: self.on_hero_killed(), 0.2)
 
@@ -163,7 +164,7 @@ class GameScreenView(BaseScreenView):
                         size_hint=(None, None),
                         size=(cube_width, cube_height),
                         background_normal=texture,
-                        opacity=0,
+                        opacity=0
                     )
                     self.add_widget(cube_wall)
                     self.model.array_of_blocks.append(cube_wall)

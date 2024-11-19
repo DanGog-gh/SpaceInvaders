@@ -12,7 +12,7 @@ class GameOverScreenController:
     def on_tap_reset_game_button(self):
         """Метод вызывается при нажатии по кнопке RESET на экране GameOverScreenView."""
 
-        self.view.manager_current = "game screen"
+        self.view.manager.current = "game screen"
         self.view.manager.get_screen("game screen").model.reset_hero_hp()
         self.view.manager.get_screen("game screen").update_hero_hp_display()
         self.view.manager.get_screen("game screen").add_enemy()
