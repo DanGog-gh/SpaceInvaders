@@ -51,11 +51,13 @@ class GameScreenView(BaseScreenView):
         self.premium_gun.move_down()
 
     def upgrade_gun(self):
-        """Обновляет текст текущего оружия на экране."""
+        """Метод обновляет текст текущего оружия на экране."""
 
         self.ids.type_gun.text = self.model.premium_guns[self.model.current_gun_index]
 
     def check_time_big_enemy(self, interval):
+        """Метод создаёт большого врага каждые 5 секунд."""
+
         score_container = self.ids.score_container
 
         self.model.interval_big_enemy += interval
@@ -69,7 +71,7 @@ class GameScreenView(BaseScreenView):
             self.model.interval_big_enemy = 0
 
     def animation_explosion_enemy(self, enemy):
-        """Анимирует взрыв врага."""
+        """Метод анимации взрыва врага."""
 
         def set_sprite(*args):
             if self.explosion_number_sprite > 7:
@@ -89,7 +91,7 @@ class GameScreenView(BaseScreenView):
         Clock.schedule_interval(set_sprite, 0.1)
 
     def animation_explosion_hero(self, hero):
-        """Анимирует взрыв героя."""
+        """Метод анимации взрыва героя."""
 
         def set_sprite(*args):
             if self.explosion_number_sprite > 7:
@@ -105,12 +107,12 @@ class GameScreenView(BaseScreenView):
         Clock.schedule_interval(set_sprite, 0.1)
 
     def block_explosion(self, block):
-        """Анимирует взрыв героя."""
+        """Метод анимации взрыва блока."""
 
         self.remove_widget(block)
 
     def remove_big_enemy(self, big_enemy):
-        """Удаляет премиальное оружие с экрана."""
+        """Метод удаляет большого врага с экрана."""
 
         self.remove_widget(big_enemy)
         self.big_enemy = None
@@ -118,6 +120,8 @@ class GameScreenView(BaseScreenView):
             big_enemy.mothership_move_sound.stop()
 
     def remove_premium_gun(self, premium_gun):
+        """Метод удаляет премиальное оружие с экрана."""
+
         self.remove_widget(premium_gun)
         premium_gun.have_picked_up_weapon = False
         self.premium_gun = None
@@ -156,6 +160,7 @@ class GameScreenView(BaseScreenView):
                 self.remove_widget(widget)
 
         def create_wall(x_offset):
+            """Метод создаёт стену из блоков 3x3."""
             for row in range(rows):
                 for col in range(cols):
                     cube_wall = Block(
@@ -215,6 +220,7 @@ class GameScreenView(BaseScreenView):
         Clock.schedule_interval(self.enemies_shoot, 1)
 
     def enemies_shoot(self, interval):
+        """Метод стрельбы врагов."""
 
         # Сортируем врагов по рядам, начиная с нижнего ряда.
         sorted_enemies = sorted(self.model.array_of_enemies, key=lambda enemy: enemy.row)
@@ -244,6 +250,8 @@ class GameScreenView(BaseScreenView):
                 enemy.fire()
 
     def on_bullet_hit_hero(self):
+        """Обрабатывает ситуацию, когда пули врагов достигли героя."""
+
         Clock.unschedule(self.enemies_shoot)
 
     # def on_size(self, *args):

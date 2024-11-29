@@ -17,7 +17,7 @@ with open(
 
 
 class Enemy(Image):
-    """Класс реализующий врага."""
+    """Класс, реализующий врага."""
 
     view = ObjectProperty()
     model = ObjectProperty()
@@ -35,7 +35,7 @@ class Enemy(Image):
         self.animation_move_down = None
 
     def fire(self, *args):
-        """Реализует движение пули."""
+        """Метод, реализующий движение пули."""
 
         if self.blaster_enemy_sound:
             self.blaster_enemy_sound.play()
@@ -46,7 +46,7 @@ class Enemy(Image):
         self.list_bullets[bullet] = method
 
     def move_bullet(self, *args):
-        """Метод реализует движение пуль."""
+        """Метод, реализующий движение пуль."""
 
         for bullet, method in list(self.list_bullets.items()):
             bullet.y -= self.model.default_shift_bullet
@@ -92,7 +92,7 @@ class Enemy(Image):
         self.list_bullets.clear()
 
     def move_right(self, *args):
-        """Анимация движения врага вправо."""
+        """Движение врага вправо."""
 
         if self.model.array_of_enemies:  # если враги существуют на экране
             x = (self.pos[0] + Window.width / 10) - 24  # сдвиг по оси x

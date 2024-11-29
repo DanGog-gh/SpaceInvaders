@@ -6,7 +6,7 @@ from kivymd.uix.behaviors import TouchBehavior
 
 
 class ClickableButton(TouchBehavior, Image, ButtonBehavior):
-    """Класс реализующий кликабельные кнопки"""
+    """Класс, реализующий кликабельные кнопки"""
 
     direction = StringProperty()  # тип кнопки - "left/right"
     controller = ObjectProperty()  # инстанс контроллера
@@ -18,12 +18,12 @@ class ClickableButton(TouchBehavior, Image, ButtonBehavior):
             self.controller.on_touch_button_up(self.direction)
 
     def on_long_touch(self, touch, *args):
-        """Метод вызывается при долгом тапе по кнопке."""
+        """Метод вызывается при долгом нажатии по кнопке."""
 
         self.controller.on_long_touch(self.direction)
 
     def on_touch_down(self, touch, *args):
-        """Метод вызывается при долгом тапе по кнопке."""
+        """Метод вызывается при долгом нажатии по кнопке."""
 
         if self.collide_point(touch.x, touch.y):
             if self.direction == "right":

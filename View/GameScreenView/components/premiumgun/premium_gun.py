@@ -42,7 +42,7 @@ class PremiumGun(Image):
             print("Подобрано премиальное оружие.")
 
     def move_down(self, *args):
-        """Метод реализует движение премиального оружие вниз."""
+        """Метод, реализующий движение премиального оружие вниз."""
         anim = Animation(y=0, d=self.model.speed_big_enemy)
         anim.bind(
             on_progress=self.move_progress,

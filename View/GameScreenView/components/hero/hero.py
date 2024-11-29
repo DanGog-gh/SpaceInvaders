@@ -18,7 +18,7 @@ with open(
 
 
 class Hero(Image):
-    """Класс реализующий героя."""
+    """Класс, реализующий героя."""
 
     view = ObjectProperty()
     controller = ObjectProperty()
@@ -34,7 +34,7 @@ class Hero(Image):
         self.enemy_dead_sound = SoundLoader.load("resources/audio/enemy_dead.mp3")
 
     def fire(self, *args):
-        """Реализует движение пули."""
+        """Метод, реализующий движение пули."""
 
         # Воспроизвести звук self.blaster_hero_sound.
         if self.blaster_hero_sound:
@@ -56,7 +56,7 @@ class Hero(Image):
         self.list_bullets[bullet] = method
 
     def move_bullet(self, *args):
-        """Метод реализует движение пуль."""
+        """Метод, реализующий движение пуль."""
 
         for bullet, method in list(self.list_bullets.items()):
             bullet.y += self.model.default_shift_bullet

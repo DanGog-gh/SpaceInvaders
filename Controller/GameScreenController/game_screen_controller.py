@@ -12,6 +12,7 @@ class GameScreenController:
         self.view = GameScreenView(controller=self, model=self.model)
 
     def on_enemy_move_down(self, y):
+        """Метод проверяет столкновение героя с врагами при движении врагов вниз."""
         self.model.check_collision(y, self.view.ids.hero.y + self.view.ids.hero.height / 2)
 
     def on_tap_left_button(self, *args):
