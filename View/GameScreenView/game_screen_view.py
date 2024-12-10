@@ -3,10 +3,7 @@ from kivy.clock import Clock
 from kivy.core.audio import SoundLoader
 from kivy.core.window import Window
 from kivy.metrics import dp
-from kivy.properties import BooleanProperty
-from kivy.uix.button import Button
 from kivy.uix.image import Image
-from kivymd.uix.gridlayout import MDGridLayout
 
 from View.GameScreenView.components.bigenemy.big_enemy import BigEnemy
 from View.GameScreenView.components.block.block import Block
@@ -37,9 +34,12 @@ class GameScreenView(BaseScreenView):
         self.background_sound = SoundLoader.load("resources/audio/soundtrack_3.mp3")
         self.background_sound.loop = True
         self.blaster_enemy_sound = SoundLoader.load("resources/audio/blaster_enemy.mp3")
+        # Находится ли перемещение объекта героя в процессе анимации.
+        self.amin_move_hero_is_progress = False
 
         if self.background_sound:
             self.background_sound.play()
+
         Clock.schedule_once(self.add_enemy, 2)
         Clock.schedule_once(self.add_wall)
         Clock.schedule_interval(self.check_time_big_enemy, 1)
@@ -264,14 +264,23 @@ class GameScreenView(BaseScreenView):
     #     self.add_enemy()
 
     def model_is_changed(self):
-        Animation(
-            x=self.model.hero_pos_x, duration=0.1, transition="in_out_quad"
-        ).start(self.ids.hero)
+        def amin_move_hero_complete(*args):
+            self.amin_move_hero_is_progress = False
 
         if self.model.collision_with_hero is True and self.model.array_of_enemies:
             self.controller.on_hero_killed()
         if self.model.bullet_hit_hero:
             print("ddddd")
+            
+        if self.amin_move_hero_is_progress:
+            return
+        
+        amin_move_hero = Animation(
+            x=self.model.hero_pos_x, duration=0.6, transition="out_sine"
+        )
+        amin_move_hero.bind(on_complete=amin_move_hero_complete)
+        amin_move_hero.start(self.ids.hero)
+        self.amin_move_hero_is_progress = True
 
     def on_hero_killed(self, *args):
         """Обрабатывает ситуацию, когда враги/пули врагов достигли героя."""

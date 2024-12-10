@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc37b5f9-6c96-4e7b-8a21-f5dac44fdfcc" name="Changes" comment="" />
+    <list default="true" id="cc37b5f9-6c96-4e7b-8a21-f5dac44fdfcc" name="Changes" comment="Воспроизведение аудио файла выстрела врага выненесно в главную View.&#10;&#10;Fix:&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/GameScreenModel/game_screen_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/GameScreenModel/game_screen_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/GameScreenView/components/bigenemy/big_enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/View/GameScreenView/components/bigenemy/big_enemy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/GameScreenView/game_screen_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/View/GameScreenView/game_screen_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,12 +44,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/MAX/PycharmProjects/SpaceInvaders/resources/images",
+    "last_opened_file_path": "/Users/urijivanov/Projects/SpaceInvaders",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="C:\Users\MAX\PycharmProjects\SpaceInvaders\resources\images" />
       <recent name="C:\Users\MAX\PycharmProjects\SpaceInvaders\resources\audio" />
     </key>
@@ -57,7 +65,6 @@
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SpaceInvaders" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -99,6 +106,34 @@
       <option name="presentableId" value="Default" />
       <updated>1721121890599</updated>
     </task>
+    <task id="LOCAL-00001" summary="Исправлено воспроизведение аудио файла&#10;&#10;Исправлено воспроизведение аудио файла движения врага.">
+      <created>1733828676286</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733828676286</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Удалено воспроизведение аудио файла&#10;&#10;Удалено воспроизведение аудио файла выстрела врага.&#10;Воспроизведение выненесно в главную View. Это исправляло ошибк:&#10;&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'">
+      <created>1733829760473</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733829760473</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Воспроизведение аудио файла выстрела врага выненесно в главную View.&#10;&#10;Fix:&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'">
+      <created>1733829846764</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733829846764</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Исправлено воспроизведение аудио файла&#10;&#10;Исправлено воспроизведение аудио файла движения врага." />
+    <MESSAGE value="Удалено воспроизведение аудио файла&#10;&#10;Удалено воспроизведение аудио файла выстрела врага.&#10;Воспроизведение выненесно в главную View. Это исправляло ошибк:&#10;&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'" />
+    <MESSAGE value="Воспроизведение аудио файла выстрела врага выненесно в главную View.&#10;&#10;Fix:&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Воспроизведение аудио файла выстрела врага выненесно в главную View.&#10;&#10;Fix:&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'" />
   </component>
 </project>

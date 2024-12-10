@@ -17,6 +17,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.joinpath("libs")))
 os.environ["KIVY_ORIENTATION"] = "Portrait"
+os.environ["KIVY_AUDIO"] = "ffpyplayer"
 
 from kivy import Config
 from kivy.lang import Builder

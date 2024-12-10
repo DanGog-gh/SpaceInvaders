@@ -12,7 +12,7 @@ class GameScreenModel(BaseScreenModel):
     def __init__(self, config, root_config=None):
         self.config = config
         self.root_config = root_config
-        self.default_shift = 20
+        self.default_shift = 50
         self.premium_guns = {0: "default", 1: "laser", 2: "triple"}  # словарь с типами премиального оружия
         self.current_gun_index = 0  # текущий тип оружия
         self.array_of_enemies = []  # список существующих врагов на экране
@@ -31,7 +31,7 @@ class GameScreenModel(BaseScreenModel):
         self.bullet_hit_target = False  # попала ли пуля во врага
         self.bullet_hit_hero = False  # попала ли пуля в героя
         self.bullet_hit_block = False  # попала ли пуля в препятствие
-        self.hero_invincibility = False  # неуязвимость героя
+        self.hero_invincibility = True  # неуязвимость героя
 
         self.interval_big_enemy = 0
 
@@ -44,7 +44,7 @@ class GameScreenModel(BaseScreenModel):
     @bullet_hit_hero.setter
     def bullet_hit_hero(self, data: int):
         self._bullet_hit_hero = data
-        self.notify_observers("game screen", True)
+        self.notify_observers("game screen", data)
 
     @property
     def speed_bullet_enemy(self) -> float:
@@ -148,11 +148,14 @@ class GameScreenModel(BaseScreenModel):
         """Метод проверяет попадание пулей героя во врага/большого врага."""
 
         # Проверяем, находится ли пуля в пределах врага по оси X
-        if (bullet.x >= enemy.x) and (bullet.x <= enemy.x + enemy.width):
+        if (bullet.x + bullet.width >= enemy.x) and (
+                bullet.x <= enemy.x + enemy.width):
             # Проверяем столкновение по оси Y
             if (bullet.y >= enemy.y) and (bullet.y <= enemy.y + enemy.height):
                 self.bullet_hit_target = True
         else:
+            self.bullet_hit_target = False
+
             self.bullet_hit_target = False
 
     def check_bullet_hit_hero(self, bullet, hero):
@@ -168,8 +171,9 @@ class GameScreenModel(BaseScreenModel):
     def check_bullet_hit_block(self, bullet, block):
         """Метод проверяет попадание пулей в блоки."""
 
-        if (bullet.x >= block.x) and (bullet.x <= block.x + block.width):
-            # Проверяем столкновение по оси Y
+        # Проверяем, пересекаются ли пуля и враг по оси X
+        if (bullet.x + bullet.width >= block.x) and (bullet.x <= block.x + block.width):
+            # Проверяем пересечение по оси Y
             if (bullet.y >= block.y) and (bullet.y <= block.y + block.height):
                 self.bullet_hit_block = True
         else:

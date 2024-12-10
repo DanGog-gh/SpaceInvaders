@@ -39,6 +39,9 @@ class BigEnemy(Image):
     def fire(self, *args):
         """Реализует движение пули."""
 
+        if self.view.blaster_enemy_sound:
+            Clock.schedule_once(lambda x: self.view.blaster_enemy_sound.play(), 0.2)
+
         self.bullet_is_fly = True
         bullet = BulletBigEnemy(y=self.y)
         bullet.x = (self.x + self.width / 2) - bullet.width / 2
