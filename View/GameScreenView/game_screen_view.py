@@ -36,6 +36,8 @@ class GameScreenView(BaseScreenView):
         # Загружаем фоновую мелодию игры.
         self.background_sound = SoundLoader.load("resources/audio/soundtrack_3.mp3")
         self.background_sound.loop = True
+        self.blaster_enemy_sound = SoundLoader.load("resources/audio/blaster_enemy.mp3")
+
         if self.background_sound:
             self.background_sound.play()
         Clock.schedule_once(self.add_enemy, 2)
@@ -221,6 +223,9 @@ class GameScreenView(BaseScreenView):
 
     def enemies_shoot(self, interval):
         """Метод стрельбы врагов."""
+
+        if self.blaster_enemy_sound:
+            Clock.schedule_once(lambda x: self.blaster_enemy_sound.play(), 0.2)
 
         # Сортируем врагов по рядам, начиная с нижнего ряда.
         sorted_enemies = sorted(self.model.array_of_enemies, key=lambda enemy: enemy.row)
