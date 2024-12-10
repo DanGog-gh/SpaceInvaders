@@ -28,7 +28,6 @@ class Enemy(Image):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.blaster_enemy_sound = SoundLoader.load("resources/audio/blaster_enemy.mp3")
         self.enemy_last_direction = "right"
         self.animation_move_right = None
         self.animation_move_left = None
@@ -37,8 +36,6 @@ class Enemy(Image):
     def fire(self, *args):
         """Метод, реализующий движение пули."""
 
-        if self.blaster_enemy_sound:
-            self.blaster_enemy_sound.play()
         bullet = BulletEnemy(y=self.y)
         bullet.x = (self.x + self.width / 2) - bullet.width / 2
         self.view.add_widget(bullet)
