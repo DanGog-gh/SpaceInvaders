@@ -59,7 +59,7 @@ class BigEnemy(Image):
         self.random_fire_position = random.randint(self.width, self.view.width + (self.width * 2))
 
         if self.mothership_move_sound:
-            self.mothership_move_sound.play()
+            Clock.schedule_once(lambda x: self.mothership_move_sound.play(), 0.2)
 
         anim = Animation(x=self.view.width, d=self.model.speed_big_enemy)
         anim.bind(
