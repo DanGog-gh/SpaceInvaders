@@ -28,9 +28,11 @@ class Hero(Image):
     def __init__(self, **kwargs):
 
         super().__init__(**kwargs)
-        # Инициализируем переменную с именем self.blaster_hero_sound класса SoundLoader с треком blaster_hero.mp3.
+        # Инициализируем переменную с именем self.blaster_hero_sound класса
+        # SoundLoader с треком blaster_hero.mp3.
         self.blaster_hero_sound = SoundLoader.load("resources/audio/blaster_hero.mp3")
-        # Инициализируем переменную с именем self.enemy_dead_sound класса SoundLoader с треком enemy_dead.mp3.
+        # Инициализируем переменную с именем self.enemy_dead_sound класса
+        # SoundLoader с треком enemy_dead.mp3.
         self.enemy_dead_sound = SoundLoader.load("resources/audio/enemy_dead.mp3")
 
     def fire(self, *args):
@@ -85,8 +87,15 @@ class Hero(Image):
             # Проверка на попадание пули в большого врага.
             if self.view.big_enemy:
                 self.model.check_bullet_hit_target(bullet, self.view.big_enemy)
-                if self.model.bullet_hit_target and self.view.big_enemy.state == "default":
-                    self.controller.on_bullet_hit_target(self.view.big_enemy, self.view.big_enemy.x, self.view.big_enemy.x)
+                if (
+                    self.model.bullet_hit_target
+                    and self.view.big_enemy.state == "default"
+                ):
+                    self.controller.on_bullet_hit_target(
+                        self.view.big_enemy,
+                        self.view.big_enemy.x,
+                        self.view.big_enemy.x,
+                    )
 
             # Проверка на выход пули за пределы экрана.
             if self.model.bullet_hit_target or bullet.y > self.view.height:

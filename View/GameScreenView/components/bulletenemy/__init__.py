@@ -1,1 +1,1 @@
-from  .bullet_enemy import BulletEnemy
+from .bullet_enemy import BulletEnemy

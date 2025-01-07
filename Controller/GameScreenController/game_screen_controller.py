@@ -5,6 +5,7 @@ from View.GameScreenView.components.enemy import Enemy
 from View.GameScreenView.components.hero import Hero
 from View.GameScreenView.game_screen_view import GameScreenView
 
+
 class GameScreenController:
     def __init__(self, model):
         # Model.GameScreenModel.game_screen_model.GameScreenModel
@@ -13,7 +14,10 @@ class GameScreenController:
 
     def on_enemy_move_down(self, y):
         """Метод проверяет столкновение героя с врагами при движении врагов вниз."""
-        self.model.check_collision(y, self.view.ids.hero.y + self.view.ids.hero.height / 2)
+
+        self.model.check_collision(
+            y, self.view.ids.hero.y + self.view.ids.hero.height / 2
+        )
 
     def on_tap_left_button(self, *args):
         """Метод вызывается при тапе по кнопке движения влево."""
@@ -48,14 +52,15 @@ class GameScreenController:
 
         # Уменьшает количество жизней героя.
         self.model.reduce_hero_hp()
-
         # Удаляем героя и пулю.
         self.view.animation_explosion_hero(self.view.ids.hero)  # Анимация взрыва героя
 
         # Сброс настроек премиального оружия.
         self.model.reset_premium_gun()
 
-        self.view.ids.type_gun.text = self.model.premium_guns[self.model.current_gun_index]
+        self.view.ids.type_gun.text = self.model.premium_guns[
+            self.model.current_gun_index
+        ]
 
     def on_bullet_hit_block(self, block, x=0, y=0):
         """Метод вызывается при попадании пуль в препятствие."""
@@ -93,7 +98,7 @@ class GameScreenController:
         elif direction == "left":
             Clock.schedule_interval(self.on_tap_left_button, 0.1)
 
-    def on_touch_button_up(self,  direction):
+    def on_touch_button_up(self, direction):
         """Метод вызывается при отпускании касания к объекту кнопки."""
 
         if direction == "right":

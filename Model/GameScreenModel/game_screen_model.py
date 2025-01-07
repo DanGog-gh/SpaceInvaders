@@ -13,25 +13,32 @@ class GameScreenModel(BaseScreenModel):
         self.config = config
         self.root_config = root_config
         self.default_shift = 50
-        self.premium_guns = {0: "default", 1: "laser", 2: "triple"}  # словарь с типами премиального оружия
+        self.premium_guns = {
+            0: "default",
+            1: "laser",
+            2: "triple",
+        }  # словарь с типами премиального оружия
         self.current_gun_index = 0  # текущий тип оружия
         self.array_of_enemies = []  # список существующих врагов на экране
-        self.array_of_blocks = []  # список типа self.array_of_enemies для блоков препятствий.
+        self.array_of_blocks = (
+            []
+        )  # список типа self.array_of_enemies для блоков препятствий.
         self._hero_pos_x = 0  # начальное положение героя по оси X
         self._speed_enemy_right = 1.5  # скорость движения врага вправо
-        self._speed_enemy_left = 1.5   # скорость движения врага влево
-        self._speed_enemy_down = 0.8   # скорость движения врага вниз
+        self._speed_enemy_left = 1.5  # скорость движения врага влево
+        self._speed_enemy_down = 0.8  # скорость движения врага вниз
         self._collision_with_hero = False  # столкнулись ли враги с героем
         self._speed_bullet_hero = 1 / 60
         self.speed_big_enemy = 3
-        self._speed_bullet_enemy = 1 / 60
+        self._speed_bullet_enemy = 0.02
+        self.interval_fire_enemies = 3  # интервал выстрелов врагов
         self.total_hero_hp = 3  # количество жизней героя
         self.default_shift_bullet = 10
         self._current_hero_hp = 3
         self.bullet_hit_target = False  # попала ли пуля во врага
         self.bullet_hit_hero = False  # попала ли пуля в героя
         self.bullet_hit_block = False  # попала ли пуля в препятствие
-        self.hero_invincibility = True  # неуязвимость героя
+        self.hero_invincibility = False  # неуязвимость героя
 
         self.interval_big_enemy = 0
 
@@ -148,8 +155,7 @@ class GameScreenModel(BaseScreenModel):
         """Метод проверяет попадание пулей героя во врага/большого врага."""
 
         # Проверяем, находится ли пуля в пределах врага по оси X
-        if (bullet.x + bullet.width >= enemy.x) and (
-                bullet.x <= enemy.x + enemy.width):
+        if (bullet.x + bullet.width >= enemy.x) and (bullet.x <= enemy.x + enemy.width):
             # Проверяем столкновение по оси Y
             if (bullet.y >= enemy.y) and (bullet.y <= enemy.y + enemy.height):
                 self.bullet_hit_target = True

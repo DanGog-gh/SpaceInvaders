@@ -7,7 +7,9 @@ from kivy.uix.image import Image
 
 from View.GameScreenView.components.bigenemy.big_enemy import BigEnemy
 from View.GameScreenView.components.block.block import Block
-from View.GameScreenView.components.clickablebutton.clickable_button import ClickableButton  # NOQA
+from View.GameScreenView.components.clickablebutton.clickable_button import (
+    ClickableButton,
+)  # NOQA
 from View.GameScreenView.components.bullethero import BulletHero  # NOQA
 from View.GameScreenView.components.enemy import Enemy
 from View.GameScreenView.components.hero import Hero  # NOQA
@@ -34,20 +36,27 @@ class GameScreenView(BaseScreenView):
         self.background_sound = SoundLoader.load("resources/audio/soundtrack_3.mp3")
         self.background_sound.loop = True
         self.blaster_enemy_sound = SoundLoader.load("resources/audio/blaster_enemy.mp3")
+        self.hero_dead_sound = SoundLoader.load("resources/audio/damage_2.mp3")
         # Находится ли перемещение объекта героя в процессе анимации.
         self.amin_move_hero_is_progress = False
 
         if self.background_sound:
             self.background_sound.play()
 
-        Clock.schedule_once(self.add_enemy, 2)
+        self.rebuild_game()
+
+    def rebuild_game(self):
+        Clock.schedule_interval(self.add_enemy, 1)
+        # Clock.schedule_once(self.add_enemy, 2)
         Clock.schedule_once(self.add_wall)
         Clock.schedule_interval(self.check_time_big_enemy, 1)
 
     def spawn_premium_gun(self, x, y):
         """Метод создает премиальное оружие на экране."""
 
-        self.premium_gun = PremiumGun(view=self, model=self.model, controller=self.controller)
+        self.premium_gun = PremiumGun(
+            view=self, model=self.model, controller=self.controller
+        )
         self.premium_gun.pos = (x, y)
         self.add_widget(self.premium_gun)
         self.premium_gun.move_down()
@@ -65,9 +74,15 @@ class GameScreenView(BaseScreenView):
         self.model.interval_big_enemy += interval
         if self.model.interval_big_enemy > 5:
             # Создаём большого врага.
-            self.big_enemy = BigEnemy(view=self, model=self.model, controller=self.controller)
+            self.big_enemy = BigEnemy(
+                view=self, model=self.model, controller=self.controller
+            )
             self.big_enemy.x = -self.big_enemy.width
-            self.big_enemy.y = self.height - (self.big_enemy.height + dp(20)) - self.ids.score_container.height
+            self.big_enemy.y = (
+                self.height
+                - (self.big_enemy.height + dp(20))
+                - self.ids.score_container.height
+            )
             self.add_widget(self.big_enemy)
             self.big_enemy.move_right()
             self.model.interval_big_enemy = 0
@@ -87,7 +102,9 @@ class GameScreenView(BaseScreenView):
                 self.controller.check_exists_enemies()
 
             self.explosion_number_sprite += 1
-            enemy.source = f"resources/images/explosion-{self.explosion_number_sprite}.PNG"
+            enemy.source = (
+                f"resources/images/explosion-{self.explosion_number_sprite}.png"
+            )
             enemy.reload()
 
         Clock.schedule_interval(set_sprite, 0.1)
@@ -98,13 +115,18 @@ class GameScreenView(BaseScreenView):
         def set_sprite(*args):
             if self.explosion_number_sprite > 7:
                 self.explosion_number_sprite = 0
-                hero.opacity=0
+                hero.opacity = 0
                 Clock.unschedule(set_sprite)
                 Clock.schedule_once(lambda x: self.on_hero_killed(), 0.2)
 
             self.explosion_number_sprite += 1
-            hero.source = f"resources/images/explosion-{self.explosion_number_sprite}.PNG"
+            hero.source = (
+                f"resources/images/explosion-{self.explosion_number_sprite}.png"
+            )
             hero.reload()
+
+        if self.hero_dead_sound:
+            self.hero_dead_sound.play()
 
         Clock.schedule_interval(set_sprite, 0.1)
 
@@ -138,7 +160,9 @@ class GameScreenView(BaseScreenView):
 
         screen_width = Window.width  # ширина экрана
         spacing_block = dp(40)  # отступ между блоками препятствий
-        width = (screen_width - spacing_block * 2) / 9  # ширина одного препятствия в блоке
+        width = (
+            screen_width - spacing_block * 2
+        ) / 9  # ширина одного препятствия в блоке
         # Размер кубика в блоке препятствий.
         cube_width = width
         cube_height = width
@@ -154,7 +178,9 @@ class GameScreenView(BaseScreenView):
         # Положение второго блока с кубиками препятствий.
         center_x_offset = (((screen_width - block_width) // 2) + y_offset) - cube_width
         # Положение третьего блока с кубиками препятствий.
-        right_x_offset = (screen_width - block_width + (y_offset * 2)) - (cube_width * 2)
+        right_x_offset = (screen_width - block_width + (y_offset * 2)) - (
+            cube_width * 2
+        )
 
         # Перед созданием препятствий удаляем старые препятствия.
         for widget in self.children[:]:
@@ -167,11 +193,12 @@ class GameScreenView(BaseScreenView):
                 for col in range(cols):
                     cube_wall = Block(
                         x=(x_offset + col * cube_width),
-                        y=(row * cube_height) + (self.ids.hero.y + self.ids.hero.height + dp(48)),
+                        y=(row * cube_height)
+                        + (self.ids.hero.y + self.ids.hero.height + dp(48)),
                         size_hint=(None, None),
                         size=(cube_width, cube_height),
                         background_normal=texture,
-                        opacity=0
+                        opacity=0,
                     )
                     self.add_widget(cube_wall)
                     self.model.array_of_blocks.append(cube_wall)
@@ -200,7 +227,16 @@ class GameScreenView(BaseScreenView):
         enemy_width = ((self.width - (num_cols + 1) * spacing) / num_cols) - 10
         enemy_height = enemy_width  # враги квадратные
         x_start = spacing  # начальный отступ слева
-        y_start = self.height - score_container.height - spacing - enemy_height  # начальный отступ сверху
+        y_start = (
+            self.height - score_container.height - spacing - enemy_height
+        )  # начальный отступ сверху
+
+        if y_start < 100:
+            return
+        else:
+            print("UNSHEDULE")
+            Clock.unschedule(self.add_enemy)
+            Clock.unschedule(self.enemies_shoot)
 
         for row in range(num_rows):
             for col in range(num_cols):
@@ -209,17 +245,21 @@ class GameScreenView(BaseScreenView):
                     row=row,
                     col=col,
                     model=self.model,
-                    controller=self.controller
+                    controller=self.controller,
                 )
                 enemy.size = (enemy_width, enemy_height)
                 x_pos = x_start + col * (enemy_width + spacing)
                 y_pos = y_start - row * (enemy_height + spacing)
+                # print(y_pos, enemy)
                 enemy.pos = (x_pos, y_pos)
                 self.model.array_of_enemies.append(enemy)
                 self.add_widget(enemy)
-                enemy.move_right()
+                # enemy.move_right()
 
-        Clock.schedule_interval(self.enemies_shoot, 1)
+        for enemy in self.model.array_of_enemies:
+            enemy.move_right()
+
+        Clock.schedule_interval(self.enemies_shoot, self.model.interval_fire_enemies)
 
     def enemies_shoot(self, interval):
         """Метод стрельбы врагов."""
@@ -228,7 +268,9 @@ class GameScreenView(BaseScreenView):
             Clock.schedule_once(lambda x: self.blaster_enemy_sound.play(), 0.2)
 
         # Сортируем врагов по рядам, начиная с нижнего ряда.
-        sorted_enemies = sorted(self.model.array_of_enemies, key=lambda enemy: enemy.row)
+        sorted_enemies = sorted(
+            self.model.array_of_enemies, key=lambda enemy: enemy.row
+        )
 
         # Список врагов, которые могут стрелять.
         eligible_enemies = []
@@ -250,7 +292,9 @@ class GameScreenView(BaseScreenView):
 
         # Выбираем три случайных врага для стрельбы.
         if len(eligible_enemies) > 0:
-            enemies_to_shoot = random.sample(eligible_enemies, min(3, len(eligible_enemies)))
+            enemies_to_shoot = random.sample(
+                eligible_enemies, min(3, len(eligible_enemies))
+            )
             for enemy in enemies_to_shoot:
                 enemy.fire()
 
@@ -262,25 +306,6 @@ class GameScreenView(BaseScreenView):
     # def on_size(self, *args):
     #     # Обновляем положение врагов при изменении размера окна
     #     self.add_enemy()
-
-    def model_is_changed(self):
-        def amin_move_hero_complete(*args):
-            self.amin_move_hero_is_progress = False
-
-        if self.model.collision_with_hero is True and self.model.array_of_enemies:
-            self.controller.on_hero_killed()
-        if self.model.bullet_hit_hero:
-            print("ddddd")
-            
-        if self.amin_move_hero_is_progress:
-            return
-        
-        amin_move_hero = Animation(
-            x=self.model.hero_pos_x, duration=0.6, transition="out_sine"
-        )
-        amin_move_hero.bind(on_complete=amin_move_hero_complete)
-        amin_move_hero.start(self.ids.hero)
-        self.amin_move_hero_is_progress = True
 
     def on_hero_killed(self, *args):
         """Обрабатывает ситуацию, когда враги/пули врагов достигли героя."""
@@ -300,7 +325,7 @@ class GameScreenView(BaseScreenView):
                 if isinstance(widget, BigEnemy):
                     self.remove_widget(widget)
                     break
-            self.manager.current = 'game over screen'
+            self.manager.current = "game over screen"
 
     def reload_hero(self):
         """Обновляет отображение прозрачности и текстуры героя."""
@@ -317,8 +342,27 @@ class GameScreenView(BaseScreenView):
         for hp in range(self.model.total_hero_hp):
             self.ids.lives_box.add_widget(
                 Image(
-                    source='resources/images/life.png',
+                    source="resources/images/life.png",
                     size_hint=(None, None),
-                    size=("25dp", "25dp")
+                    size=("25dp", "25dp"),
                 )
             )
+
+    def model_is_changed(self):
+        def amin_move_hero_complete(*args):
+            self.amin_move_hero_is_progress = False
+
+        if self.model.collision_with_hero is True and self.model.array_of_enemies:
+            self.controller.on_hero_killed()
+        if self.model.bullet_hit_hero:
+            print("ddddd")
+
+        if self.amin_move_hero_is_progress:
+            return
+
+        amin_move_hero = Animation(
+            x=self.model.hero_pos_x, duration=0.6, transition="out_sine"
+        )
+        amin_move_hero.bind(on_complete=amin_move_hero_complete)
+        amin_move_hero.start(self.ids.hero)
+        self.amin_move_hero_is_progress = True

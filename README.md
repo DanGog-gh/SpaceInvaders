@@ -72,3 +72,6 @@ Build APK
 cd path/to/project
 buildozer android debug
 ```
+
+
+Здравствуйте!

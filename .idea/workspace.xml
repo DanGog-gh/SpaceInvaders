@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc37b5f9-6c96-4e7b-8a21-f5dac44fdfcc" name="Changes" comment="Воспроизведение аудио файла выстрела врага выненесно в главную View.&#10;&#10;Fix:&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'">
+    <list default="true" id="cc37b5f9-6c96-4e7b-8a21-f5dac44fdfcc" name="Changes" comment="Add specification for APK builiding">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/GameScreenModel/game_screen_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/GameScreenModel/game_screen_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/GameScreenView/components/bigenemy/big_enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/View/GameScreenView/components/bigenemy/big_enemy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/GameScreenView/game_screen_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/View/GameScreenView/game_screen_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,16 +33,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/urijivanov/Projects/SpaceInvaders",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/urijivanov/Projects/SpaceInvaders&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -62,7 +57,28 @@
       <recent name="$PROJECT_DIR$/resources/fonts" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="finder" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="SpaceInvaders" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../Dev/Freelance/KazaqstanAllergoproba/tests" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../Dev/Freelance/KazaqstanAllergoproba/tests/finder.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SpaceInvaders" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,6 +103,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.finder" />
       </list>
     </recent_temporary>
   </component>
@@ -127,13 +144,32 @@
       <option name="project" value="LOCAL" />
       <updated>1733829846764</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix bugs">
+      <created>1733842049061</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733842049061</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add specification for APK builiding">
+      <created>1733842132218</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733842132218</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.spec" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Исправлено воспроизведение аудио файла&#10;&#10;Исправлено воспроизведение аудио файла движения врага." />
     <MESSAGE value="Удалено воспроизведение аудио файла&#10;&#10;Удалено воспроизведение аудио файла выстрела врага.&#10;Воспроизведение выненесно в главную View. Это исправляло ошибк:&#10;&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'" />
     <MESSAGE value="Воспроизведение аудио файла выстрела врага выненесно в главную View.&#10;&#10;Fix:&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Воспроизведение аудио файла выстрела врага выненесно в главную View.&#10;&#10;Fix:&#10;'Too many open audio devices.No more channel combinations to try, audio open failed'" />
+    <MESSAGE value="Fix bugs" />
+    <MESSAGE value="Add specification for APK builiding" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add specification for APK builiding" />
   </component>
 </project>

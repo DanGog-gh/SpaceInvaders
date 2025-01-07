@@ -31,11 +31,10 @@ source.include_exts = py,
 source.dir = .
 
 # Иконка приложения
-# icon.filename = %(source.dir)s/data/images/icon.png
+icon.filename = %(source.dir)s/resources/images/big-enemy.png
 
 # Пресплеш приложения
-# presplash.filename = %(source.dir)s/data/images/presplash.png
-android.presplash_color = #1E0438
+presplash.filename = %(source.dir)s/resources/presplash.png
 
 # Версия установочного пакета
 version = 1.0.0
@@ -75,6 +74,10 @@ android.archs = arm64-v8a, armeabi-v7a
 
 # Целевой уровень Android API.
 android.api = 34
+
+android.ndk_path = /Users/urijivanov/.buildozer/android/platform/android-ndk-r25b
+android.sdk_path = /Users/urijivanov/.buildozer/android/platform/android-sdk
+android.ant_path = /Users/urijivanov/.buildozer/android/platform/apache-ant-1.9.4
 
 # Включает функцию автоматического резервного копирования Android
 # (Android API >= 23)

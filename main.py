@@ -17,7 +17,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.joinpath("libs")))
 os.environ["KIVY_ORIENTATION"] = "Portrait"
-os.environ["KIVY_AUDIO"] = "ffpyplayer"
+os.environ["KIVY_AUDIO"] = "sdl2"
 
 from kivy import Config
 from kivy.lang import Builder
@@ -47,10 +47,11 @@ from kivymd.app import MDApp
 from Model.GameScreenModel.game_screen_model import GameScreenModel
 from Model.GameOverScreenModel.game_over_screen_model import GameOverScreenModel
 
-from Controller.GameScreenController.game_screen_controller import \
-    GameScreenController
-from Controller.GameOverScreenController.game_over_screen_controller import \
-    GameOverScreenController
+from Controller.GameScreenController.game_screen_controller import GameScreenController
+from Controller.GameOverScreenController.game_over_screen_controller import (
+    GameOverScreenController,
+)
+
 ###############################################################################
 
 
@@ -72,24 +73,24 @@ class SpaceInvaders(MDApp):
         # Создание модели.
         game_screen_model = GameScreenModel(config=self.config, root_config=Config)
         # Создание контроллера.
-        game_screen_controller = GameScreenController(game_screen_model)
+        self.game_screen_controller = GameScreenController(game_screen_model)
         # Получение представления/экрана/view.
-        game_screen_view = game_screen_controller.get_view()
+        game_screen_view = self.game_screen_controller.get_view()
         # Добавляем представление в экранный менеджер.
         self.manager_screens.add_widget(game_screen_view)
 
         # Загружаем макеты пользовательского UI игрового экрана.
         Builder.load_file("View/GameOverScreenView/game_over_screen_view.kv")
         # Создание модели.
-        game_over_screen_model = GameOverScreenModel(config=self.config, root_config=Config)
+        game_over_screen_model = GameOverScreenModel(
+            config=self.config, root_config=Config
+        )
         # Создание контроллера.
         game_over_screen_controller = GameOverScreenController(game_over_screen_model)
         # Получение представления/экрана/view.
         game_over_screen_view = game_over_screen_controller.get_view()
         # Добавляем представление в экранный менеджер.
         self.manager_screens.add_widget(game_over_screen_view)
-
-        return self.manager_screens
 
     def build_config(self, config):
         """Создает файл настроек spaceinvaders.ini."""

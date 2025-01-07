@@ -39,7 +39,9 @@ class Enemy(Image):
         bullet = BulletEnemy(y=self.y)
         bullet.x = (self.x + self.width / 2) - bullet.width / 2
         self.view.add_widget(bullet)
-        method = Clock.schedule_interval(self.move_bullet, self.model.speed_bullet_enemy)
+        method = Clock.schedule_interval(
+            self.move_bullet, self.model.speed_bullet_enemy
+        )
         self.list_bullets[bullet] = method
 
     def move_bullet(self, *args):
@@ -49,14 +51,6 @@ class Enemy(Image):
             bullet.y -= self.model.default_shift_bullet
 
             # Проверка на попадание пули в героя.
-            # FIXME: Поскольку на экране может быть одновременно несколько пуль врага, метод move_bullet будет
-            #  вызываться бесконечно для каждой отдельной пули. И если какая-то из пуль попала во врага, то
-            #  self.model.bullet_hit_hero будет равен True для каждой пули на экране в это время. Из-за чего
-            #  нижеследующее условие и соответствующие вызовы зацикливаются.
-            #  Ввести в модель переменную значение которой будет изменено сразу при попадании какой-либо пули врага в
-            #  героя.
-            #  Внести соответствующее изменение в условие if self.model.bullet_hit_hero and not self.model.hero_invincibility и
-            #  проверить будет ли это работать.
             self.model.check_bullet_hit_hero(bullet, self.view.ids.hero)
             if self.model.bullet_hit_hero and not self.model.hero_invincibility:
                 self.controller.reset_enemies()
@@ -80,7 +74,10 @@ class Enemy(Image):
                 del self.list_bullets[bullet]
 
     def remove_and_unbind_move_bullet(self):
-        """Удаляем объекты пули врагов с экрана и отвязываем метод move_bullet от бесконечного вызова."""
+        """
+        Удаляем объекты пули врагов с экрана и отвязываем метод move_bullet от
+        бесконечного вызова.
+        """
 
         for object_bullet, move_method in self.list_bullets.items():
             self.view.remove_widget(object_bullet)
@@ -94,11 +91,12 @@ class Enemy(Image):
         if self.model.array_of_enemies:  # если враги существуют на экране
             x = (self.pos[0] + Window.width / 10) - 24  # сдвиг по оси x
             self.animation_move_right = Animation(
-                x=x, duration=self.model.speed_enemy_right,
-                transition="in_out_cubic"
+                x=x, duration=self.model.speed_enemy_right, transition="in_out_cubic"
             )
             # Привязываем событие окончания анимации к вызову методу move_down.
-            self.animation_move_right.bind(on_complete=self.move_down)
+            self.animation_move_right.bind(
+                on_complete=lambda *x: Clock.schedule_once(self.move_down, 0.2)
+            )
             self.animation_move_right.start(self)  # старт анимации
 
     def move_left(self, *args):
@@ -107,11 +105,10 @@ class Enemy(Image):
         if self.model.array_of_enemies:  # если враги существуют на экране
             x = (self.pos[0] - Window.width / 10) + 24
             self.animation_move_left = Animation(
-                x=x, duration=self.model.speed_enemy_left,
-                transition="in_out_cubic"
+                x=x, duration=self.model.speed_enemy_left, transition="in_out_cubic"
             )
             self.animation_move_left.bind(
-                on_complete=self.move_down
+                on_complete=lambda *x: Clock.schedule_once(self.move_down, 0.2)
             )
             self.animation_move_left.start(self)
 
@@ -120,12 +117,10 @@ class Enemy(Image):
 
         if self.model.array_of_enemies:  # если враги существуют на экране
             y = self.pos[1] - Window.height / 80
-
             self.controller.on_enemy_move_down(y)
 
             self.animation_move_down = Animation(
-                y=y, duration=self.model.speed_enemy_down,
-                transition="in_back"
+                y=y, duration=self.model.speed_enemy_down, transition="in_back"
             )
             if self.enemy_last_direction == "right":
                 self.enemy_last_direction = "left"

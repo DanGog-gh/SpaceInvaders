@@ -4,7 +4,12 @@ import random
 from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.core.audio import SoundLoader
-from kivy.properties import ObjectProperty, NumericProperty, DictProperty, OptionProperty
+from kivy.properties import (
+    ObjectProperty,
+    NumericProperty,
+    DictProperty,
+    OptionProperty,
+)
 from kivy.uix.image import Image
 from kivy.lang import Builder
 
@@ -46,20 +51,28 @@ class BigEnemy(Image):
         bullet = BulletBigEnemy(y=self.y)
         bullet.x = (self.x + self.width / 2) - bullet.width / 2
         self.view.add_widget(bullet)
-        method = Clock.schedule_interval(self.move_bullet, self.model.speed_bullet_enemy)
+        method = Clock.schedule_interval(
+            self.move_bullet, self.model.speed_bullet_enemy
+        )
         self.list_bullets[bullet] = method
 
     def move_progress(self, *args):
         """Метод реализует движение врага."""
 
-        if self.view.big_enemy and self.random_fire_position < self.x + self.width and not self.bullet_is_fly:
+        if (
+            self.view.big_enemy
+            and self.random_fire_position < self.x + self.width
+            and not self.bullet_is_fly
+        ):
             self.fire()
 
     def move_right(self, *args):
         """Метод реализует движение врага."""
 
         # Устанавливаем случайную позицию выстрела.
-        self.random_fire_position = random.randint(self.width, self.view.width + (self.width * 2))
+        self.random_fire_position = random.randint(
+            self.width, self.view.width + (self.width * 2)
+        )
 
         if self.mothership_move_sound:
             Clock.schedule_once(lambda x: self.mothership_move_sound.play(), 0.2)

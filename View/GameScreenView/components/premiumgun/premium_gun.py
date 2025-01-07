@@ -24,7 +24,9 @@ class PremiumGun(Image):
         super().__init__(**kwargs)
         # Подобрали ли премиальное оружие.
         self.have_picked_up_weapon = False
-        self.picked_weapon_sound = SoundLoader.load("resources/audio/pick_up_weapon.mp3")
+        self.picked_weapon_sound = SoundLoader.load(
+            "resources/audio/pick_up_weapon.mp3"
+        )
 
     def move_progress(self, animation, premium_gun, progress):
         """Метод проверяет, подобрано ли премиальное оружие героем."""
